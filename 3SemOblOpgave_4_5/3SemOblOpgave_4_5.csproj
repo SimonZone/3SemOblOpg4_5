@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>_3SemOblOpgave_4_5</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Repository\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="3SemOblOpgave1">
+      <HintPath>..\..\SimonZone\3SemOblOpgave1\3SemOblOpgave1\obj\Debug\3SemOblOpgave1.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
