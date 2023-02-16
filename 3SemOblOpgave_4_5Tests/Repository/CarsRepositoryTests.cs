@@ -71,7 +71,7 @@ namespace _3SemOblOpgave1.Tests
         [TestMethod()]
         public void UpdateCarTest()
         {
-            Car carWithTheUpdatedData = new Car(expectedId, "Test", 1000, "te2354");
+            Car carWithTheUpdatedData = new(expectedId, "Test", 1000, "te2354");
             Car carWithTheUpdatedDataFromRepo = _repo.UpdateCar(expectedId, carWithTheUpdatedData);
             Assert.AreEqual(expectedId, carWithTheUpdatedDataFromRepo.Id, "Id is not the same");
             Assert.AreEqual(carWithTheUpdatedData.Price, carWithTheUpdatedDataFromRepo.Price, "Price is not the same");

@@ -54,7 +54,7 @@ namespace _3SemOblOpgave_4_5.Controllers
                 return BadRequest("Car Not Created");
             }
             Car car = _carsRepository.CreateCar(newCar);
-            return Created("api/Cars", car);
+            return Created($"api/cars/{car.Id}", car);
         }
 
         [ProducesResponseType(StatusCodes.Status200OK)]
