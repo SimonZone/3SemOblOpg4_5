@@ -21,12 +21,15 @@ namespace _3SemOblOpgave_4_5.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Car>> Index()
         {
-            List<Car> cars = _carsRepository.GetAll();
-            if (cars == null)
+            try
             {
-                return NotFound("No Cars Found");
+                List<Car> cars = _carsRepository.GetAll();
+                return Ok(cars);
             }
-            return Ok(cars);
+            catch (ArgumentNullException)
+            {
+                return NotFound("No Cars was Found");
+            }
         }
 
         // GET: CarsController/Details/5
@@ -35,12 +38,15 @@ namespace _3SemOblOpgave_4_5.Controllers
         [HttpGet("{id}")]
         public ActionResult<Car> Details(int id)
         {
-            Car car = _carsRepository.GetById(id);
-            if (car == null)
+            try
             {
-                return NotFound($"No Such Car, Id: " + id);
+                Car car = _carsRepository.GetById(id);
+                return Ok(car);
             }
-            return Ok(car);
+            catch (ArgumentNullException ex)
+            {
+                return NotFound($"Car with Id: {id} was not Found. " + ex.Message);
+            }
         }
 
         // GET: CarsController/Create
@@ -49,12 +55,15 @@ namespace _3SemOblOpgave_4_5.Controllers
         [HttpPost]
         public ActionResult<Car> Create([FromBody] Car newCar)
         {
-            if (newCar == null)
+            try
             {
-                return BadRequest("Car Not Created");
+                Car car = _carsRepository.CreateCar(newCar);
+                return Created($"api/cars/{car.Id}", car);
             }
-            Car car = _carsRepository.CreateCar(newCar);
-            return Created($"api/cars/{car.Id}", car);
+            catch (ArgumentNullException)
+            {
+                return BadRequest("Car was not Created" + newCar);
+            }
         }
 
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -64,22 +73,22 @@ namespace _3SemOblOpgave_4_5.Controllers
         [HttpPut("{id}")]
         public ActionResult<Car?> Edit(int id, [FromBody] Car carToUpdate)
         {
-            Car carToBeUpdated = _carsRepository.GetById(id);
-            if (carToBeUpdated == null)
-            {
-                return NotFound($"No Such Car, Id: " + id);
-            }
 
-            Car carUpdated;
+
             try
             {
-                carUpdated = _carsRepository.UpdateCar(carToBeUpdated.Id, carToUpdate);
+                Car carToBeUpdated = _carsRepository.GetById(id);
+                if (carToBeUpdated == null)
+                {
+                    return NotFound($"No Such Car, Id: " + id);
+                }
+                Car carUpdated = _carsRepository.UpdateCar(carToBeUpdated.Id, carToUpdate);
+                return Ok(carUpdated);
             }
             catch (ArgumentNullException)
             {
                 return BadRequest("Car Not Updated, the data to update could not be processed");
             }
-            return Ok(carUpdated);
         }
 
         // GET: CarsController/Delete/5

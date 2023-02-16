@@ -78,6 +78,7 @@ namespace _3SemOblOpgave1.Tests
             Assert.AreEqual(carWithTheUpdatedData.Model, carWithTheUpdatedDataFromRepo.Model, "Model is not the same");
             Assert.AreEqual(carWithTheUpdatedData.LicensePlate, carWithTheUpdatedDataFromRepo.LicensePlate, "LicensePlates is not the same");
             Assert.IsInstanceOfType(carWithTheUpdatedDataFromRepo, typeof(Car), "Is not type of: Car");
+            Assert.ThrowsException<ArgumentNullException>(() => _repo.UpdateCar(0, carWithTheUpdatedData), "Car is not updated");
         }
 
         [TestMethod()]
