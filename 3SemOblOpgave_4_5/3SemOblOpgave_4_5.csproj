@@ -16,6 +16,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="3SemOblOpgave1">
       <HintPath>..\..\..\3SemOblOpgave1\3SemOblOpgave1\obj\Debug\3SemOblOpgave1.dll</HintPath>
     </Reference>
